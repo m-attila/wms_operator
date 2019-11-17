@@ -24,7 +24,8 @@
 -export([init/1,
          handle_info/2,
          handle_call/3,
-         handle_cast/2, interaction_wrapper/4]).
+         handle_cast/2,
+         interaction_wrapper/4]).
 
 %% =============================================================================
 %% Types
@@ -163,7 +164,8 @@ handle_cast({interaction, InteractionRequestID, InteractionID, Parameters},
   NewState =
     case maps:get(InteractionID, Interactions, undefined) of
       undefined ->
-        ?error("~s interaction not defined in operator_actor on node ~s",
+        ?error("OPA-0001",
+               "~s interaction not defined in operator_actor on node ~s",
                [InteractionID, node()]),
         ok = wms_dist:call(wms_distributor_actor,
                            interaction_reply,
@@ -238,7 +240,8 @@ interaction_wrapper(Module, InteractionRequestID, InteractionID, Parameters) ->
       Ret
     catch
       C:E:St ->
-        ?error("~s operator actor error for ~s interaction, on node ~s "
+        ?error("OPA-0002",
+               "~s operator actor error for ~s interaction, on node ~s "
                "with ~s request ID: ~s:~p~n~p", [Module,
                                                  InteractionID,
                                                  node(),
