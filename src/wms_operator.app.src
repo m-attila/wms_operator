@@ -6,10 +6,11 @@
   {applications,
    [kernel,
     stdlib,
+    odbc,
     wms_cfg
    ]},
   {env,[]},
-  {modules, []},
+  {modules, [wms_operator_actor, wms_operator_odbc]},
 
   {licenses, ["Apache 2.0"]},
   {links, []}

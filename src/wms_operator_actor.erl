@@ -95,13 +95,13 @@ logout() ->
 -spec init(Args :: term()) ->
   {ok, State :: state()}.
 init(_) ->
-  self() ! start,
   Interactions = wms_cfg:get(?APP_NAME, interactions, #{}),
   case map_size(Interactions) of
     0 ->
       ?warning("No interactions are defined for operator_actor on node ~s",
                [node()]);
     _ ->
+      self() ! start,
       ?info("~p interactions are defined for operator_actor on node ~s",
             [maps:keys(Interactions), node()])
   end,
