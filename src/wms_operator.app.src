@@ -1,5 +1,5 @@
 {application, wms_operator,
- [{description, "An OTP application"},
+ [{description, "OperatorActor implementatios"},
   {vsn, "0.1.0"},
   {registered, []},
   {mod, {wms_operator_app, []}},
